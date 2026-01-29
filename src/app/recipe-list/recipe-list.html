@@ -1,1 +1,37 @@
-<p>recipe-list works!</p>
+
+<h2>Choose a Recipe</h2>
+
+<div class="button-row">
+	<button (click)="giveSpaghetti()">spaghetti tarifi</button>
+	<button (click)="giveCaprese()">caprese tarifi</button>
+</div>
+
+<img [src]="recipe().imageUrl" [alt]="recipe().name" style="max-width:300px;display:block;margin-bottom:1rem;" />
+<p>{{recipe().name}} with Id of {{recipe().id}}.</p>
+<p>{{recipe().description}}</p>
+<ul>
+	@for (ingredient of adjustedIngredients(); track ingredient.name){
+	<li>
+		{{ ingredient.quantity }}
+		{{ ingredient.unit }}
+		{{ ingredient.name }}
+	</li>
+	}
+</ul>
+
+@if (recipe().name === 'Spaghetti') {
+<h3>Spaghetti Servings - [{{sservings()}}]</h3>
+<div class="button-row">
+	<button (click)="incrementSpaghettiServings()">increment</button>
+	<button (click)="decrementSpaghettiServings()" [disabled]="sservings() === 1">
+		decrement
+	</button>
+</div>
+
+} @else if (recipe().name === 'Caprese'){
+<h3>Caprese Servings - [{{cservings()}}]</h3>
+<div class="button-row">
+	<button (click)="incrementCapreseServings()">increment</button>
+	<button (click)="decrementCapreseServings() " [disabled]="cservings() === 1">decrement</button>
+</div>
+}
